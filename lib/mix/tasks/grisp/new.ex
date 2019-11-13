@@ -6,7 +6,7 @@ defmodule Mix.Tasks.Grisp.New do
 
   alias GrispBootstrap.Project
 
-  @grisp Path.expand("../..", __DIR__) |> IO.inspect(label: "grisp path")
+  @grisp Path.expand("..", __DIR__) |> IO.inspect(label: "grisp path")
 
   @raw_copy [
     "/rel/vm.args"
