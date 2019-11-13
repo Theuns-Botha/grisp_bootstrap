@@ -1,5 +1,7 @@
 defmodule GrispBootstrap.Project do
 
+  alias GrispBootstrap.Project
+
   defstruct base_path: nil,
             app: nil,
             app_mod: nil,
