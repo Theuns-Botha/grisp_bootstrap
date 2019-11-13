@@ -9,24 +9,34 @@ defmodule Mix.Tasks.Grisp.New do
   @switches [supervisor: :boolean]
 
   def run(args) do
-    __ENV__.file |> IO.inspect()
-    # {opts, root_path} = parse_opts(args)
+    {opts, root_path} = parse_opts(args)
 
-    # root_path
-    # |> Project.new(opts)
+    root_path
+    |> Project.new(opts) |> IO.inspect()
     # |> validate_project()
-    # |> generate()
-
+    |> generate()
   end
 
-  # def generate(%Project{} = project) do
-  #   all_templates =
-  #
-  #   all_templates
-  #   |> Stream.map(&render_eex/1)
-  #   |> Stream.map(&copy_to_target/1)
-  #   |> Stream.run
-  # end
+  def ls_r(path \\ ".") do
+    cond do
+      File.regular?(path) -> [path]
+      File.dir?(path) ->
+        File.ls!(path)
+        |> Enum.map(&Path.join(path, &1))
+        |> Enum.map(&ls_r/1)
+        |> Enum.concat
+      true -> []
+    end
+  end
+
+  def generate(%Project{template_path: template_path} = project) do
+    all_templates = ls_r(template_path)
+
+    all_templates |> IO.inspect()
+    # |> Stream.map(&render_eex/1)
+    # |> Stream.map(&copy_to_target/1)
+    # |> Stream.run
+  end
   #
   # defp validate_project(%Project{opts: opts} = project) do
   #   check_app_name!(project.app, !!opts[:app])
