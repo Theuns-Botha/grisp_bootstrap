@@ -6,9 +6,25 @@ defmodule Mix.Tasks.Grisp.New do
 
   alias GrispBootstrap.Project
 
+  @grisp Path.expand("../..", __DIR__) |> IO.inspect(label: "grisp path")
+
   @raw_copy [
     "/rel/vm.args"
   ]
+
+  @ls_r_func fn(path) ->
+    cond do
+      File.regular?(path) -> [path]
+      File.dir?(path) ->
+        File.ls!(path)
+        |> Enum.map(&Path.join(path, &1))
+        |> Enum.map(fn(var) -> @ls_r_func.(var) end)
+        |> Enum.concat
+      true -> []
+    end
+  end
+
+  @templates (Enum.map(@ls_r_func.("priv/template"), &Path.relative/1))
 
   @switches [supervisor: :boolean]
 
@@ -16,7 +32,7 @@ defmodule Mix.Tasks.Grisp.New do
     {opts, root_path} = parse_opts(args)
 
     root_path
-    |> Project.new(opts) |> IO.inspect()
+    |> Project.new(opts)
     # |> validate_project()
     |> generate()
   end
@@ -36,10 +52,8 @@ defmodule Mix.Tasks.Grisp.New do
   def generate(%Project{template_path: template_path} = project) do
     raw_copies = @raw_copy
     |> Enum.map(fn(rel_path) -> template_path <> rel_path end)
-    |> IO.inspect()
 
-    render_templates = ls_r(template_path) -- raw_copies
-    |> IO.inspect()
+    render_templates = @templates -- raw_copies
 
     render_templates
     |> Enum.map(fn(source_file) -> target_tuple(source_file, project) end)
@@ -51,7 +65,6 @@ defmodule Mix.Tasks.Grisp.New do
   def target_tuple(source_file, %{base_path: base_path, template_path: template_path}) do
     rel_path = Path.relative_to(source_file, template_path)
     {source_file, Path.join(base_path, rel_path)}
-    |> IO.inspect()
   end
   #
   # defp validate_project(%Project{opts: opts} = project) do
