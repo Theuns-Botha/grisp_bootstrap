@@ -17,7 +17,7 @@ defmodule GrispBootstrap.Project do
     app_mod = Module.concat([opts[:module] || Macro.camelize(app)])
 
     __DIR__ |> IO.inspect()
-    |> ls_r()
+    ls_r()
     |> IO.inspect()
 
     template_path = Path.join([Mix.Project.build_path(), "lib", "grisp_bootstrap", "priv", "template"])
