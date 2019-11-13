@@ -17,6 +17,8 @@ defmodule GrispBootstrap.Project do
     app_mod = Module.concat([opts[:module] || Macro.camelize(app)])
 
     __DIR__ |> IO.inspect()
+    |> ls_r()
+    |> IO.inspect()
 
     template_path = Path.join([Mix.Project.build_path(), "lib", "grisp_bootstrap", "priv", "template"])
 
@@ -29,6 +31,17 @@ defmodule GrispBootstrap.Project do
       opts: opts,
       template_path: template_path
     }
+  end
+  def ls_r(path \\ ".") do
+    cond do
+      File.regular?(path) -> [path]
+      File.dir?(path) ->
+        File.ls!(path)
+        |> Enum.map(&Path.join(path, &1))
+        |> Enum.map(&ls_r/1)
+        |> Enum.concat
+      true -> []
+    end
   end
 
 end
