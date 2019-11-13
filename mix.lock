@@ -1,0 +1,4 @@
+%{
+  "eliver": {:hex, :eliver, "2.0.3", "ddfb3a9e77028298dd8cb9d91bfe16a39db67a1f43830bb8f1c3ad085a9c96fe", [:mix], [{:enquirer, "~> 0.1.0", [hex: :enquirer, repo: "hexpm", optional: false]}], "hexpm"},
+  "enquirer": {:hex, :enquirer, "0.1.0", "96ca1a330c919652db4baed6cf572d8c9957a8a305365c54490262c337996a18", [:mix], [], "hexpm"},
+}
