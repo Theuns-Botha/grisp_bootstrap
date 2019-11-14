@@ -93,7 +93,7 @@ defmodule Mix.Tasks.Grisp.New do
   end
 
   defp parse_opts(argv) do
-    case OptionParser.parse(argv, strict: @switches) |> IO.inspect() do
+    case OptionParser.parse(argv, strict: @switches) do
       {opts, [app_name], []} ->
         {opts, app_name}
       {_opts, [_arg | _more_args], []} ->
