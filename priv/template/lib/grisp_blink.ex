@@ -1,6 +1,6 @@
-defmodule GrispBlink do
+defmodule <%= app_mod %> do
   @moduledoc """
-  Documentation for GrispBlink.
+  Documentation for <%= app_mod %>.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule GrispBlink do
 
   ## Examples
 
-      iex> GrispBlink.hello()
+      iex> <%= app_mod %>.hello()
       :world
 
   """

@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure your application as:
 #
-#     config :grisp_blink, key: :value
+#     config :<%= app %>, key: :value
 #
 # and access this configuration in your application as:
 #
-#     Application.get_env(:grisp_blink, :key)
+#     Application.get_env(:<%= app %>, :key)
 #
 # You can also configure a third-party app:
 #

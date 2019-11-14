@@ -1,8 +1,8 @@
-defmodule GrispBlinkTest do
+defmodule <%= app_mod %>Test do
   use ExUnit.Case
-  doctest GrispBlink
+  doctest <%= app_mod %>
 
   test "greets the world" do
-    assert GrispBlink.hello() == :world
+    assert <%= app_mod %>.hello() == :world
   end
 end

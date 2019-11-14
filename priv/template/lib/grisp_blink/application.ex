@@ -1,4 +1,4 @@
-defmodule GrispBlink.Application do
+defmodule <%= app_mod %>.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -8,13 +8,13 @@ defmodule GrispBlink.Application do
   def start(_type, _args) do
     # List all child processes to be supervised
     children = [
-      # Starts a worker by calling: GrispBlink.Worker.start_link(arg)
-      # {GrispBlink.Worker, arg}
+      # Starts a worker by calling: <%= app_mod %>.Worker.start_link(arg)
+      # {<%= app_mod %>.Worker, arg}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: GrispBlink.Supervisor]
+    opts = [strategy: :one_for_one, name: <%= app_mod %>.Supervisor]
     Supervisor.start_link(children, opts)
   end
 end

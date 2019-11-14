@@ -1,9 +1,9 @@
-defmodule GrispBlink.MixProject do
+defmodule <%= app_mod %>.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :grisp_blink,
+      app: :<%= app %>,
       version: "0.1.0",
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
@@ -11,7 +11,7 @@ defmodule GrispBlink.MixProject do
       grisp: [
         otp: [version: "22.0"],
         deploy: [
-          destination: "{media_path}"
+          destination: <%= media_path || "put media path here" %>
         ]
       ]
     ]
@@ -21,7 +21,7 @@ defmodule GrispBlink.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {GrispBlink.Application, []}
+      mod: {<%= app_mod %>.Application, []}
     ]
   end
 

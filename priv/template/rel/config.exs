@@ -17,6 +17,6 @@ environment :grisp do
   set cookie: :"GRiSP"
 end
 
-release :grisp_blink do
-  set version: current_version(:grisp_blink)
+release :<%= app %> do
+  set version: current_version(:<%= app %>)
 end
