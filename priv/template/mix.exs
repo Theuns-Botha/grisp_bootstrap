@@ -11,7 +11,7 @@ defmodule <%= app_mod %>.MixProject do
       grisp: [
         otp: [version: "22.0"],
         deploy: [
-          destination: <%= media_path || "put media path here" %>
+          destination: "<%= media_path %>"
         ]
       ]
     ]

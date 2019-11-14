@@ -40,7 +40,7 @@ defmodule Mix.Tasks.Grisp.New do
     end) -- (@raw_copy ++ @dot_files)
   )
 
-  @switches [supervisor: :boolean]
+  @switches [media_path: :string, supervisor: :boolean]
 
   def run(args) do
     {opts, root_path} = parse_opts(args)
@@ -93,7 +93,7 @@ defmodule Mix.Tasks.Grisp.New do
   end
 
   defp parse_opts(argv) do
-    case OptionParser.parse(argv, strict: @switches) do
+    case OptionParser.parse(argv, strict: @switches) |> IO.inspect() do
       {opts, [app_name], []} ->
         {opts, app_name}
       {_opts, [_arg | _more_args], []} ->
